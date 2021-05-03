@@ -1,13 +1,15 @@
-  # Setup official gitlab community repository
+{% set edition = salt['pillar.get']('gitlab:edition', 'gitlab-ce') %}
+
+# Setup official gitlab community repository
 gitlab_repo:
   pkgrepo.managed:
-    - name: deb https://packages.gitlab.com/gitlab/gitlab-ce/ubuntu/focal main
-    - file: /etc/apt/sources.list.d/gitlab_gitlab-ce.list
+    - name: deb https://packages.gitlab.com/gitlab/{{ edition }}/ubuntu/ {{ grains['oscodename'] }} main
+    - file: /etc/apt/sources.list.d/gitlab_{{ edition }}.list
     - key_url: https://packages.gitlab.com/gpg.key
     - require_in:
-      - pkg: gitlab-ce
+      - pkg: {{ edition }}
 
-gitlab-ce:
+{{ edition }}:
   pkg.installed: []
 
 /etc/gitlab/gitlab.rb:
@@ -18,7 +20,7 @@ gitlab-ce:
     - source: salt://{{ tpldir }}/gitlab.rb.jinja
     - template: jinja
     - require:
-      - pkg: gitlab-ce
+      - pkg: {{ edition }}
   cmd.run:
     - name: gitlab-ctl reconfigure
     - onchanges:
