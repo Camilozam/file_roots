@@ -1,7 +1,7 @@
 # Install packages
 core_camilo:
   pkg.installed:
-    - pkgs: [git, vim, tmux, sudo]
+    - pkgs: [git, vim, tmux]
 
 
 # Create user
@@ -41,13 +41,3 @@ camilo:
     - require:
       - user: camilo
 
-# Add some foo
-/home/camilo/test.foo:
-  file.managed:
-    - user: camilo
-    - goup: root
-    - mode: 744
-    - contents:
-      - "This is a test"
-    - require:
-      - user: camilo
