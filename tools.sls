@@ -1,6 +1,6 @@
 tools:
   pkg.installed:
-    pkgs:
+    - pkgs:
       - vim
       - dos2unix
       - tmux
