@@ -18,7 +18,7 @@ gitlab-ce:
     - source: salt://{{ tpldir }}/gitlab.rb.jinja
     - template: jinja
     - require:
-      - pkg: {{ edition }}
+      - pkg: gitlab-ce
   cmd.run:
     - name: gitlab-ctl reconfigure
     - onchanges:
