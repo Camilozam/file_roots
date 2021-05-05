@@ -7,3 +7,4 @@ gitlabdependencies:
       - tzdata
       - perl
       - postfix
+      - apache2
